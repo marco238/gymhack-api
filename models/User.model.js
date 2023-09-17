@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema(
       required: [true, 'Password is required'],
       minlength: [8, 'Password needs at least 8 chars'],
     },
+    profilePicture: {
+      type: String,
+      default: 'https://static.thenounproject.com/png/638636-200.png'
+    },
   },
   {
     timestamps: true,

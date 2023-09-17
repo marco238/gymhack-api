@@ -2,6 +2,7 @@ const router = require('express').Router();
 const authController = require('../controllers/auth.controller');
 const usersController = require('../controllers/users.controller');
 const authMiddleware = require('../middlewares/auth.middleware');
+const upload = require('../config/storage.config');
 
 // misc
 router.get('/', (req, res, next) => {
@@ -9,7 +10,7 @@ router.get('/', (req, res, next) => {
 });
 
 // auth
-router.post('/register', authController.register);
+router.post('/register', upload.single('profilePicture'), authController.register);
 router.post('/login', authController.login);
 
 // users
