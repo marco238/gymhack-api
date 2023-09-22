@@ -2,6 +2,7 @@ const router = require('express').Router();
 const authController = require('../controllers/auth.controller');
 const usersController = require('../controllers/users.controller');
 const gptController = require('../controllers/gpt.controller');
+const productsController = require('../controllers/products.controller');
 const authMiddleware = require('../middlewares/auth.middleware');
 const upload = require('../config/storage.config');
 
@@ -18,6 +19,10 @@ router.post('/login', authController.login);
 router.get('/users/me', authMiddleware.isAuthenticated, usersController.getCurrentUser);
 
 // products
+router.post('/products', authMiddleware.isAuthenticated, productsController.create);
+router.get('/products', authMiddleware.isAuthenticated, productsController.list);
+router.get('/products/:id', authMiddleware.isAuthenticated, productsController.getProduct);
+router.post('/products/checkout', authMiddleware.isAuthenticated, productsController.createCheckoutSession);
 
 // GPT
 router.get('/gpt/tip', gptController.getGptData);
